@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ABYSS TERMINAL</title>
+<style>
+body {
+  background: #030605;
+  color: #00ff88;
+  font-family: monospace;
+  padding: 20px;
+}
+.terminal {
+  max-width: 700px;
+  margin: auto;
+  border: 1px solid #00ff88;
+  padding: 20px;
+  box-shadow: 0 0 20px #00ff8840;
+}
+h2 { color: #ff3030; text-align: center; }
+#output { line-height: 2; overflow-wrap: anywhere; }
+button {
+  width: 100%;
+  padding: 14px;
+  background: #07150d;
+  border: 1px solid #00ff88;
+  color: #00ff88;
+  font-family: monospace;
+  margin-top: 20px;
+}
+</style>
+</head>
+<body>
+<div class="terminal">
+<h2>ABYSS TERMINAL</h2>
+<p>SIMULATION MODE // OFFLINE</p>
+<div id="output">Ready to start...</div>
+<button id="start">RUN SIMULATION</button>
+</div>
+<script>
+const output = document.getElementById("output");
+const button = document.getElementById("start");
+
+button.addEventListener("click", async () => {
+  button.disabled = true;
+  output.textContent = "";
+
+  const messages = [
+    "[SYSTEM] Initializing terminal...",
+    "[SCAN] Simulating network diagnostics...",
+    "[ACCESS] DEMO ACCESS GRANTED",
+    "[SECURITY] No device was accessed.",
+    "[STATUS] SIMULATION COMPLETE"
+  ];
+
+  for (const message of messages) {
+    const line = document.createElement("div");
+    output.appendChild(line);
+
+    for (const char of message) {
+      line.textContent += char;
+      await new Promise(resolve => setTimeout(resolve, 25));
+    }
+    await new Promise(resolve => setTimeout(resolve, 500));
+  }
+
+  button.disabled = false;
+});
+</script>
+</body>
+</html>
